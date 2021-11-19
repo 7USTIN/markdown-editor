@@ -1,8 +1,22 @@
 <script lang="ts">
+	import { onMount } from "svelte";
+
+	import Editor from "./components/Editor.svelte";
+	import Preview from "./components/Preview.svelte";
+
+	let alignVertical = false;
+
+	const checkWinDimensions = () => {
+		alignVertical = window.innerHeight > window.innerWidth;
+	};
+	onMount(checkWinDimensions);
 </script>
 
-<main>
-	<h1>Hello World</h1>
+<svelte:window on:resize={checkWinDimensions} />
+
+<main style={`flex-direction: ${alignVertical ? "column" : "row"}`}>
+	<Editor {alignVertical} />
+	<Preview {alignVertical} />
 </main>
 
 <style>
@@ -21,9 +35,15 @@
 	}
 
 	:global(body, button, input) {
-		font-family: "Inter", sans-serif;
+		font-family: "Noto Sans Mono", sans-serif;
 		font-size: 14px;
 		background: var(--white);
 		color: var(--black);
+	}
+
+	main {
+		display: flex;
+		width: 100vw;
+		height: 100vh;
 	}
 </style>
