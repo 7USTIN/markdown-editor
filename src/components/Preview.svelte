@@ -16,10 +16,9 @@
 
 <style lang="scss">
 	section {
-		background: lavender;
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		overflow: hidden;
+		overflow-x: hidden;
 	}
 </style>

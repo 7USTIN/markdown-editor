@@ -14,10 +14,9 @@
 
 <style lang="scss">
 	section {
-		background: lightcyan;
 		display: flex;
 		justify-content: center;
 		align-items: center;
-		overflow: hidden;
+		overflow-x: hidden;
 	}
 </style>
