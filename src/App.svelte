@@ -3,10 +3,12 @@
 
 	import Editor from "./components/Editor.svelte";
 	import Preview from "./components/Preview.svelte";
+	import Slider from "./components/Slider.svelte";
 
-	let slider: HTMLElement;
+	let slider = null;
 	let alignVertical = false;
 	let editorSize = 50;
+	let doc = "# __Hello World__";
 
 	const checkIsVertical = () => {
 		alignVertical = window.innerHeight > window.innerWidth;
@@ -21,9 +23,9 @@
 				? ev.clientY - slider.offsetTop
 				: ev.clientX - slider.offsetLeft;
 		} else {
-			const tEv =
+			const touchEv =
 				typeof ev.originalEvent === "undefined" ? ev : ev.originalEvent;
-			const touch = tEv.touches[0] || tEv.changedTouches[0];
+			const touch = touchEv.touches[0] || touchEv.changedTouches[0];
 
 			absoluteOffset = alignVertical
 				? touch.pageY - slider.offsetTop
@@ -63,37 +65,9 @@
 />
 
 <main style={`flex-direction: ${alignVertical ? "column" : "row"}`}>
-	<Editor {alignVertical} {editorSize} />
-	<Preview {alignVertical} {editorSize} />
-
-	<div
-		on:mousedown={() => window.addEventListener("mousemove", adjustSize)}
-		on:touchstart={() => window.addEventListener("touchmove", adjustSize)}
-		bind:this={slider}
-		class="slider"
-		style={`
-			top: ${alignVertical ? editorSize + "%" : "0"};
-			left: ${alignVertical ? "0" : editorSize + "%"};
-			width: ${alignVertical ? "100%" : "2px"};
-			height: ${alignVertical ? "2px" : "100%"};
-			transform: translate${alignVertical ? "Y" : "X"}(-50%);
-			cursor: ${alignVertical ? "row-resize" : "col-resize"}
-		`}
-	>
-		<div
-			class="transparent"
-			style={`transform: translate${alignVertical ? "Y" : "X"}(-50%);`}
-		/>
-
-		<div
-			class="drag-handle"
-			style={alignVertical
-				? `transform-origin: 85% 15%; transform: rotate(90deg);`
-				: ""}
-		>
-			<i class="material-icons">drag_indicator</i>
-		</div>
-	</div>
+	<Editor bind:doc {alignVertical} {editorSize} />
+	<Preview {alignVertical} {editorSize} {doc} />
+	<Slider bind:slider {alignVertical} {editorSize} {adjustSize} />
 </main>
 
 <style lang="scss">
@@ -123,39 +97,5 @@
 		width: 100vw;
 		height: 100vh;
 		display: flex;
-
-		.slider {
-			background: var(--black);
-			position: absolute;
-			user-select: none;
-			-moz-user-select: none;
-			-webkit-user-select: none;
-
-			.transparent {
-				width: 100%;
-				height: 100%;
-				border: 16px solid transparent;
-			}
-
-			.drag-handle {
-				position: absolute;
-				top: 50%;
-				left: 50%;
-				transform: translate(-50%, -50%);
-				background: var(--black);
-				border-radius: 3px;
-				overflow: hidden;
-				width: 10px;
-				height: 28px;
-				display: flex;
-				align-items: center;
-				justify-content: center;
-
-				i {
-					color: var(--white);
-					font-size: 14px;
-				}
-			}
-		}
 	}
 </style>

@@ -1,7 +1,11 @@
 <script lang="ts">
+	import { marked } from "marked";
+
 	export let alignVertical: boolean;
 	export let editorSize: number;
+	export let doc: string;
 
+	$: markdown = marked.parse(doc);
 	$: previewSize = 100 - editorSize;
 </script>
 
@@ -11,14 +15,18 @@
 		height: ${alignVertical ? previewSize : 100}%
 	`}
 >
-	<p>Preview</p>
+	<div class="preview">
+		{@html markdown}
+	</div>
 </section>
 
 <style lang="scss">
 	section {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		overflow-x: hidden;
+		overflow: hidden;
+
+		.preview {
+			white-space: nowrap;
+			margin: 32px;
+		}
 	}
 </style>
