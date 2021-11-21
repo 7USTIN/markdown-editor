@@ -25,8 +25,11 @@
 		overflow: hidden;
 
 		.preview {
+			width: 100%;
+			height: 100%;
+			overflow: auto;
 			white-space: nowrap;
-			margin: 32px;
+			padding: 32px;
 		}
 	}
 </style>

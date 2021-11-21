@@ -75,7 +75,6 @@
 		--white: #ffffff;
 		--white-dark: #f2f2f2;
 		--black: #24292e;
-		--gray: #babbbd;
 	}
 
 	:global(*) {
@@ -87,7 +86,7 @@
 
 	:global(body, button, input) {
 		font-family: "Noto Sans Mono", sans-serif;
-		font-size: 14px;
+		font-size: 16px;
 		background: var(--white);
 		color: var(--black);
 		overflow: hidden;
