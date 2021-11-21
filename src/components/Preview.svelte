@@ -1,11 +1,11 @@
 <script lang="ts">
 	import { marked } from "marked";
+	import DOMPurify from "dompurify";
 
 	export let alignVertical: boolean;
 	export let editorSize: number;
 	export let doc: string;
 
-	$: markdown = marked.parse(doc);
 	$: previewSize = 100 - editorSize;
 </script>
 
@@ -16,7 +16,7 @@
 	`}
 >
 	<div class="preview">
-		{@html markdown}
+		{@html DOMPurify.sanitize(marked.parse(doc))}
 	</div>
 </section>
 
