@@ -34,7 +34,8 @@
 			".cm-content": {
 				padding: "0",
 				caretColor: colors.text,
-				fontFamily: "Noto Sans Mono, sans-serif",
+				fontFamily: "Inter Mono, sans-serif",
+				lineHeight: "1.5rem",
 			},
 			"&.cm-focused .cm-cursor": {
 				borderLeftColor: colors.text,
@@ -64,7 +65,17 @@
 		const editorEl = document.getElementsByClassName("cm-editor")[0];
 
 		editorEl.addEventListener("keyup", () => {
-			doc = editor.state.doc.text.join("\n\n");
+			let text = editor.state.doc.text;
+
+			if (editor.state.doc.children) {
+				text = [];
+
+				editor.state.doc.children.forEach((child) => {
+					text.push(...child.text);
+				});
+			}
+
+			doc = text.join("\n");
 		});
 	});
 </script>

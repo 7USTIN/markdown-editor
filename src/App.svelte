@@ -8,7 +8,7 @@
 	let slider = null;
 	let alignVertical = false;
 	let editorSize = 50;
-	let doc = "# __Hello World__";
+	let doc = `# __Hello World__`;
 
 	const checkIsVertical = () => {
 		alignVertical = window.innerHeight > window.innerWidth;
@@ -85,7 +85,7 @@
 	}
 
 	:global(body, button, input) {
-		font-family: "Noto Sans Mono", sans-serif;
+		font-family: "Inter", sans-serif;
 		font-size: 16px;
 		background: var(--white);
 		color: var(--black);

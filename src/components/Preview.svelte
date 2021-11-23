@@ -7,6 +7,12 @@
 	export let doc: string;
 
 	$: previewSize = 100 - editorSize;
+
+	marked.setOptions({
+		breaks: true,
+		gfm: true,
+		xhtml: true,
+	});
 </script>
 
 <section
@@ -30,6 +36,7 @@
 			overflow: auto;
 			white-space: nowrap;
 			padding: 32px;
+			line-height: 1.5rem;
 		}
 	}
 </style>
