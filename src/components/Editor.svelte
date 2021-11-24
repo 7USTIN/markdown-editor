@@ -75,9 +75,12 @@
 				});
 			}
 
-			doc = text.join("\n");
+			doc = text.join(`<br>
+`);
+			console.log(text);
 		});
 	});
+	// $: console.log(doc);
 </script>
 
 <section

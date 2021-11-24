@@ -8,7 +8,7 @@
 	let slider = null;
 	let alignVertical = false;
 	let editorSize = 50;
-	let doc = `# __Hello World__`;
+	let doc = `### _a minimalistic markdown editor_`;
 
 	const checkIsVertical = () => {
 		alignVertical = window.innerHeight > window.innerWidth;

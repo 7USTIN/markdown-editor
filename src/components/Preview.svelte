@@ -1,18 +1,15 @@
 <script lang="ts">
-	import { marked } from "marked";
-	import DOMPurify from "dompurify";
+	import { Remarkable } from "remarkable";
+	const md = new Remarkable({
+		breaks: false,
+		html: true,
+	});
 
 	export let alignVertical: boolean;
 	export let editorSize: number;
 	export let doc: string;
 
 	$: previewSize = 100 - editorSize;
-
-	marked.setOptions({
-		breaks: true,
-		gfm: true,
-		xhtml: true,
-	});
 </script>
 
 <section
@@ -22,7 +19,7 @@
 	`}
 >
 	<div class="preview">
-		{@html DOMPurify.sanitize(marked.parse(doc))}
+		{@html md.render(doc)}
 	</div>
 </section>
 
@@ -34,7 +31,6 @@
 			width: 100%;
 			height: 100%;
 			overflow: auto;
-			white-space: nowrap;
 			padding: 32px;
 			line-height: 1.5rem;
 		}
