@@ -60,6 +60,7 @@
 			height: 28px;
 			display: flex;
 			align-items: center;
+			justify-content: center;
 
 			i {
 				color: var(--white);
